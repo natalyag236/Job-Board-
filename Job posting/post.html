@@ -12,7 +12,7 @@
             <a href="index.html" class="nav_logo">Trojan Job Board</a>
             <ul class="nav_link" id="man-links">
                 <li><a href="jobs.html">Jobs</a></li>
-                <li><a href="#post-job">Post Jobs</a></li>
+                <li><a href="#post">Post Jobs</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="login.html" class="button" id="btn">Login/Sign-Up</a></li>
             </ul>
@@ -20,38 +20,37 @@
     </header>
 
     <section id="post-job">
-        <form action="submit-job.php" method="post"> <br>
+        <form action="submit-job.php" method="POST">
             <br>
             <br>
             <br>
-            <form id="jobForm" method="post" onsubmit="postForm(event)">
-                <label for="jobtitle">Job Title:</label>
-                <input type="text" id="jobtitle" name="job-title" required>
+            <label for="jobtitle">Job Title:</label>
+            <input type="text" id="jobtitle" name="job-title" required>
 
-                <label for="companyname">Company Name:</label>
-                <input type="text" id="companyname" name="company-name" required>
+            <label for="companyname">Company Name:</label>
+            <input type="text" id="companyname" name="company-name" required>
 
-                <label for="joblocation">Location:</label>
-                <input type="text" id="joblocation" name="job-location" required>
+            <label for="joblocation">Location:</label>
+            <input type="text" id="joblocation" name="job-location" required>
 
-                <label for="jobdescription">Job Description:</label>
-                <textarea id="jobdescription" name="job-description" rows="4" required></textarea>
+            <label for="jobdescription">Job Description:</label>
+            <textarea id="jobdescription" name="job-description" rows="4" required></textarea>
 
-                <label for="jobtype">Job Type:</label>
-                <select id="jobtype" name="job-type" required>
-                    <option value="full-time">Full-Time</option>
-                    <option value="part-time">Part-Time</option>
-                    <option value="contract">Contract</option>
-                    <option value="internship">Internship</option>
-                </select>
+            <label for="jobtype">Job Type:</label>
+            <select id="jobtype" name="job-type" required>
+                <option value="full-time">Full-Time</option>
+                <option value="part-time">Part-Time</option>
+                <option value="contract">Contract</option>
+                <option value="internship">Internship</option>
+            </select>
 
-                <label for="salary">Salary Range:</label>
-                <input type="text" id="salary" name="salary">
-                <button type="submit">Post Job</button>
-            
-            </form>
+            <label for="salary">Salary Range:</label>
+            <input type="text" id="salary" name="salary">
+
+            <button type="submit">Post Job</button>
         </form>
     </section>
+
     <script src="script.js"></script>
 </body>
 </html>
