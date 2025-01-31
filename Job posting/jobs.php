@@ -20,51 +20,71 @@
     </header>
 
     <section id="job-listings">
-        
+        <br>
+        <br>
         <h1>Available Job Postings</h1>
-         <br>
-         <br>
+        <br>
+        <br>
         <?php
-        // Database connection parameters
-        $servername = "localhost";
-        $username = "root";
-        $password = "root"; // MAMP default password
-        $dbname = "jobposting";
-
-        // Create a connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Check the connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        // Fetch job postings from the database
-        $sql = "SELECT job_title, company_name, job_location, job_description, job_type, salary FROM jobs";
-        $result = $conn->query($sql);
-
-        // Check if there are any results
-        if ($result->num_rows > 0) {
-            // Output data for each row
-            while ($row = $result->fetch_assoc()) {
-                echo "<div class='job-post'>";
-                echo "<h2>Job Title: " . $row['job_title'] . "</h2>";
-                echo "<p><strong>Company:</strong> " . $row['company_name'] . "</p>";
-                echo "<p><strong>Location:</strong> " . $row['job_location'] . "</p>";
-                echo "<p><strong>Description:</strong> " . $row['job_description'] . "</p>";
-                echo "<p><strong>Type:</strong> " . $row['job_type'] . "</p>";
-                echo "<p><strong>Salary:</strong> " . $row['salary'] . "</p>";
-                echo "</div><br>";
+    // Start the session
+    session_start();
+    
+    // Database connection parameters
+    $servername = "localhost";
+    $username = "root";
+    $password = "root";
+    $dbname = "jobposting";
+    
+    // Create a new connection to the database
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    
+    // Check if the connection was successful
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    // Fetch all jobs with additional details
+    $sql = "SELECT job_id, job_title, company_name, job_location, job_type, salary, job_description FROM jobs";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $job_id = $row["job_id"];
+            $job_title = $row["job_title"];
+            $company_name = $row["company_name"];
+            $job_location = $row["job_location"];
+            $job_type = $row["job_type"];
+            $salary = $row["salary"];
+            $job_description = $row["job_description"];
+    
+            echo "<div class='job-listing'>";
+            echo "<h2>$job_title</h2>";
+            echo "<p><strong>Company:</strong> $company_name</p>";
+            echo "<p><strong>Location:</strong> $job_location</p>";
+            echo "<p><strong>Job Type:</strong> $job_type</p>";
+            echo "<p><strong>Salary:</strong> $$salary</p>";
+            echo "<p><strong>Description:</strong> $job_description</p>";
+    
+            // Check if user is logged in for favorites functionality
+            if (isset($_SESSION['user_id'])) {
+                $user_id = $_SESSION['user_id'];
+    
+                // Check if this job is a favorite
+                $fav_sql = "SELECT * FROM favorites WHERE user_id = $user_id AND job_id = $job_id";
+                $fav_result = $conn->query($fav_sql);
+                $is_favorite = $fav_result->num_rows > 0;
+    
+                echo "<form action='favorite-job.php' method='POST'>";
+                echo "<input type='hidden' name='job_id' value='$job_id'>";
+                echo "<button type='submit'>" . ($is_favorite ? "❤️" : "♡") . "</button>";
+                echo "</form>";
             }
-        } else {
-            echo "<p>No job postings available at the moment.</p>";
+    
+            echo "</div><hr>";
         }
-
-        // Close the connection
-        $conn->close();
-        ?>
-    </section>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    } else {
+        echo "<p>No jobs found.</p>";
+    }
+    
+    $conn->close();
+    ?>
