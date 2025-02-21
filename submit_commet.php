@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["job_id"]) && isset($_P
 
         // Database connection parameters
         $servername = "localhost";
-        $username = "root";  // Default username for MAMP
+        $username = "root";
         $password = "root";  // Default password for MAMP
         $dbname = "jobposting"; // Your database name
 
@@ -22,26 +22,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["job_id"]) && isset($_P
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Prepared SQL query to insert the comment into the 'comments' table
-        $stmt = $conn->prepare("INSERT INTO comments (job_id, user_id, comment_text) VALUES (?, ?, ?)");
-        $stmt->bind_param("iis", $job_id, $user_id, $comment_text);
+        // Escape user input to prevent SQL injection
+        $comment_text = $conn->real_escape_string($comment_text);
+
+        // SQL query to insert the comment into the 'comments' table
+        $sql = "INSERT INTO comments (job_id, user_id, comment_text) VALUES ($job_id, $user_id, '$comment_text')";
 
         // Execute the query and check if it was successful
-        if ($stmt->execute()) {
+        if ($conn->query($sql) === TRUE) {
             // Redirect back to job listings
             header("Location: jobs.php");
             exit();
         } else {
-            echo "Error: " . $stmt->error;
+            echo "Error: " . $conn->error;
         }
 
-        // Close the statement and the connection
-        $stmt->close();
+        // Close the connection
         $conn->close();
     } else {
-        echo "User not logged in.";
+        header("Location: login.php?error=not_logged_in");
+        exit();
     }
 } else {
-    echo "Invalid request.";
+    header("Location: jobs.php?error=invalid_request");
+    exit();
 }
 ?>

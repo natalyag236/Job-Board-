@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Board</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav_logo">Trojan Job Board</a>
+            <ul class="nav_link" id="man-links">
+                <li><a href="jobs.php">Jobs</a></li>
+                <li><a href="favorite-job.php">Saved</a></li>
+                <li><a href="#post">Post Jobs</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="login.html" class="button" id="btn">Login/Sign-Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="post-job">
+        <form action="submit-job.php" method="POST">
+            <br>
+            <br>
+            <br>
+            <label for="jobtitle">Job Title:</label>
+            <input type="text" id="jobtitle" name="job-title" required>
+
+            <label for="companyname">Company Name:</label>
+            <input type="text" id="companyname" name="company-name" required>
+
+            <label for="joblocation">Location:</label>
+            <input type="text" id="joblocation" name="job-location" required>
+
+            <label for="jobdescription">Job Description:</label>
+            <textarea id="jobdescription" name="job-description" rows="4" required></textarea>
+
+            <label for="jobtype">Job Type:</label>
+            <select id="jobtype" name="job-type" required>
+                <option value="full-time">Full-Time</option>
+                <option value="part-time">Part-Time</option>
+                <option value="contract">Contract</option>
+                <option value="internship">Internship</option>
+            </select>
+
+            <label for="salary">Salary Range:</label>
+            <input type="text" id="salary" name="salary">
+
+            <button type="submit">Post Job</button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
