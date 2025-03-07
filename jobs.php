@@ -70,12 +70,12 @@
 
                     echo "<form action='favorite-job.php' method='POST' style='display:inline;'>";
                     echo "<input type='hidden' name='job_id' value='$job_id'>";
-                    echo "<button type='submit'>" . ($is_favorite ? "❤️" : "♡") . "</button>";
+                    echo "<button type='submit' class='favorite-btn'>" . ($is_favorite ? "❤️" : "♡") . "</button>";
                     echo "</form>";
 
                     echo "<form action='delete_job.php' method='POST' style='display:inline;' onsubmit='return confirm(\"Are you sure you want to delete this job?\");'>";
                     echo "<input type='hidden' name='job_id' value='$job_id'>";
-                    echo "<button type='submit'>Delete</button>";
+                    echo "<button type='submit' class='delete-btn'>Delete</button>";
                     echo "</form>";
 
                     // Fetch comments
@@ -100,7 +100,7 @@
 
                     // Comment form
                     echo "<div class='comment-form'>";
-                    echo "<form action='submit_commet.php' method='POST'>";
+                    echo "<form action='submit_comment.php' method='POST'>";
                     echo "<input type='hidden' name='job_id' value='$job_id'>";
                     echo "<textarea name='comment_text' placeholder='Add a comment...' required></textarea>";
                     echo "<button type='submit' class='comment-btn'>Comment</button>";

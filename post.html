@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Board</title>
+    <title>Post a Job</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,35 +21,35 @@
     </header>
 
     <section id="post-job">
-        <form action="submit-job.php" method="POST">
-            <br>
-            <br>
-            <br>
-            <label for="jobtitle">Job Title:</label>
-            <input type="text" id="jobtitle" name="job-title" required>
+        <div class="form-container">
+            <h1>Post a Job</h1>
+            <form action="submit-job.php" method="POST">
+                <label for="jobtitle">Job Title:</label>
+                <input type="text" id="jobtitle" name="job-title" required>
 
-            <label for="companyname">Company Name:</label>
-            <input type="text" id="companyname" name="company-name" required>
+                <label for="companyname">Company Name:</label>
+                <input type="text" id="companyname" name="company-name" required>
 
-            <label for="joblocation">Location:</label>
-            <input type="text" id="joblocation" name="job-location" required>
+                <label for="joblocation">Location:</label>
+                <input type="text" id="joblocation" name="job-location" required>
 
-            <label for="jobdescription">Job Description:</label>
-            <textarea id="jobdescription" name="job-description" rows="4" required></textarea>
+                <label for="jobdescription">Job Description:</label>
+                <textarea id="jobdescription" name="job-description" rows="4" required></textarea>
 
-            <label for="jobtype">Job Type:</label>
-            <select id="jobtype" name="job-type" required>
-                <option value="full-time">Full-Time</option>
-                <option value="part-time">Part-Time</option>
-                <option value="contract">Contract</option>
-                <option value="internship">Internship</option>
-            </select>
+                <label for="jobtype">Job Type:</label>
+                <select id="jobtype" name="job-type" required>
+                    <option value="full-time">Full-Time</option>
+                    <option value="part-time">Part-Time</option>
+                    <option value="contract">Contract</option>
+                    <option value="internship">Internship</option>
+                </select>
 
-            <label for="salary">Salary Range:</label>
-            <input type="text" id="salary" name="salary">
+                <label for="salary">Salary Range:</label>
+                <input type="text" id="salary" name="salary">
 
-            <button type="submit">Post Job</button>
-        </form>
+                <button type="submit" class="btn">Post Job</button>
+            </form>
+        </div>
     </section>
 
     <script src="script.js"></script>
